@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Memory Match Level 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <style>
+        body { font-family: Poppins, Arial; background: linear-gradient(#0088cc, #ffffff); color: white; text-align: center; padding: 20px; }
+        .card { width: 80px; height: 100px; background: #FFD700; margin: 5px; display: inline-block; cursor: pointer; border-radius: 5px; text-align: center; line-height: 100px; font-size: 24px; }
+        .card.flipped { background: #DAA520; }
+        button { background: #FFD700; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #DAA520; }
+    </style>
+    <h2>Memory Match Level 1</h2>
+    <p>Matches: <span id="matches">0</span>/6</p>
+    <div id="gameBoard"></div>
+    <p id="status"></p>
+    <audio id="coinSound" src="https://limewire.com/d/YQFAi#f4e21gWcxu"></audio>
+    <script>
+        const cards = ['BON', 'BON', 'COIN', 'COIN', 'GOLD', 'GOLD', 'PLAY', 'PLAY', 'WIN', 'WIN', 'EARN', 'EARN'];
+        let shuffledCards = [...cards].sort(() => Math.random() - 0.5);
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        function createBoard() {
+            const gameBoard = document.getElementById('gameBoard');
+            for (let i = 0; i < shuffledCards.length; i++) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.value = shuffledCards[i];
+                card.addEventListener('click', flipCard);
+                gameBoard.appendChild(card);
+            }
+        }
+
+        function flipCard() {
+            if (flippedCards.length < 2 && !this.classList.contains('flipped')) {
+                this.classList.add('flipped');
+                this.innerText = this.dataset.value;
+                flippedCards.push(this);
+
+                if (flippedCards.length === 2) {
+                    setTimeout(checkMatch, 1000);
+                }
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            if (card1.dataset.value === card2.dataset.value) {
+                document.getElementById('coinSound').play();
+                matchedPairs++;
+                document.getElementById('matches').innerText = matchedPairs;
+                if (matchedPairs === 6) {
+                    localStorage.setItem('bonCoins', (parseInt(localStorage.getItem('bonCoins') || 0) + 5));
+                    document.getElementById('status').innerHTML = 'Level Complete! You earned 5 BON Coins!<br><button onclick="showAd()">Watch Ad to Unlock Level 2</button>';
+                }
+                flippedCards = [];
+            } else {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+                card1.innerText = '';
+                card2.innerText = '';
+                flippedCards = [];
+            }
+        }
+
+        function showAd() {
+            window.open('YOUR_MONETAG_AD_URL', '_blank');
+            window.location.href = 'memory-match-2.html';
+        }
+
+        createBoard();
+    </script>
+</body>
+</html>
