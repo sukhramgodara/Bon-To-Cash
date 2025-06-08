@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Obstacle Dodge Level 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: Poppins, Arial; background: linear-gradient(#0088cc, #ffffff); color: white; text-align: center; padding: 20px; overflow: hidden; }
+        #gameArea { position: relative; width: 300px; height: 400px; margin: 0 auto; background: #00000033; border: 2px solid #FFD700; }
+        #player { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 30px; height: 30px; background: url('https://www.canva.com/design/DAGpvXMDanY/bu_40e9V3YToDD248s-dOw/edit?utm_content=DAGpvXMDanY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+') no-repeat center; background-size: cover; }
+        .obstacle { position: absolute; width: 30px; height: 30px; background: #FF0000; }
+        #timer { font-size: 20px; margin-top: 10px; }
+        button { background: #FFD700; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #DAA520; }
+    </style>
+</head>
+<body>
+    <h2>Obstacle Dodge Level 1</h2>
+    <div id="gameArea">
+        <div id="player"></div>
+    </div>
+    <p id="timer">Time: 0s / 25s</p>
+    <p id="status"></p>
+    <audio id="coinSound" src="https://limewire.com/d/YQFAi#f4e21gWcxu"></audio>
+    <script>
+        const gameArea = document.getElementById('gameArea');
+        const player = document.getElementById('player');
+        const timerDisplay = document.getElementById('timer');
+        let timeLeft = 25;
+        let gameActive = true;
+        let playerX = 135; // Starting position (center)
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && playerX > 0) playerX -= 50;
+            if (e.key === 'ArrowRight' && playerX < 240) playerX += 50;
+            player.style.left = playerX + 'px';
+        });
+
+        function createObstacle() {
+            if (!gameActive) return;
+            const obstacle = document.createElement('div');
+            obstacle.className = 'obstacle';
+            obstacle.style.left = Math.random() * 240 + 'px';
+            obstacle.style.top = '-30px';
+            gameArea.appendChild(obstacle);
+
+            let top = -30;
+            const interval = setInterval(() => {
+                if (gameActive) {
+                    top += 5;
+                    obstacle.style.top = top + 'px';
+                    if (top > 400) {
+                        obstacle.remove();
+                        clearInterval(interval);
+                    }
+                    if (top > 370 && Math.abs(playerX - parseInt(obstacle.style.left)) < 30) {
+                        gameActive = false;
+                        document.getElementById('status').innerText = 'Game Over! Try Again.';
+                    }
+                }
+            }, 50);
+        }
+
+        setInterval(createObstacle, 2000);
+        const timer = setInterval(() => {
+            if (gameActive && timeLeft > 0) {
+                timeLeft--;
+                timerDisplay.innerText = 'Time: ' + timeLeft + 's / 25s';
+            } else if (timeLeft === 0) {
+                clearInterval(timer);
+                localStorage.setItem('bonCoins', (parseInt(localStorage.getItem('bonCoins') || 0) + 5));
+                document.getElementById('status').innerHTML = 'Level Complete! You earned 5 BON Coins!<br><button onclick="showAd()">Watch Ad to Unlock Level 2</button>';
+            }
+        }, 1000);
+
+        function showAd() {
+            window.open('YOUR_MONETAG_AD_URL', '_blank');
+            window.location.href = 'tap-to-earn-2.html';
+        }
+    </script>
+</body>
+</html>
