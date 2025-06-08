@@ -1,0 +1,63 @@
+:root {
+  --bg-gradient: linear-gradient(135deg, #1e1e2f, #3e3e5e);
+  --text-color: #ffffff;
+  --btn-color: #ffcc00;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.dark-mode {
+  --bg-gradient: linear-gradient(135deg, #121212, #2a2a2a);
+  --text-color: #f5f5f5;
+  --btn-color: #00ffcc;
+}
+
+.btn {
+  background-color: var(--btn-color);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  color: #121212;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.floating-coin {
+  width: 60px;
+  animation: float 4s ease-in-out infinite;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.leaderboard {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 30px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 12px rgba(0,0,0,0.4);
+}
+.leaderboard-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
