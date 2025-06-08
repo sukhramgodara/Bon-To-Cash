@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tasks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <style>
+        body { font-family: Poppins, Arial; background: linear-gradient(#0088cc, #ffffff); color: white; text-align: center; padding: 20px; }
+        button { background: #FFD700; color: white; padding: 10px 20px; border: none; border-radius: 5px; }
+    </style>
+    <h2>Earn More BON Coins</h2>
+    <p>Watch ads to earn 2 BON Coins!</p>
+    <button onclick="watchAd()">Watch Ad</button>
+    <script>
+        function watchAd() {
+            localStorage.setItem('bonCoins', (parseInt(localStorage.getItem('bonCoins') || 0) + 2));
+            window.open('YOUR_MONETAG_AD_URL', '_blank');
+            document.getElementById('coinBalance').innerText = localStorage.getItem('bonCoins');
+        }
+    </script>
+</body>
+</html>
