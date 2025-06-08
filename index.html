@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BON Game App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <style>
+        body { font-family: Poppins, Arial; background: linear-gradient(#0088cc, #ffffff); color: white; text-align: center; padding: 20px; }
+        h1 { font-size: 32px; }
+        p { font-size: 18px; }
+        .coin-img { width: 100px; animation: spin 2s infinite linear; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        button { background: #FFD700; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 10px; }
+        button:hover { background: #DAA520; box-shadow: 0 0 10px #FFD700; }
+    </style>
+    <div>
+        <h1>BON Game App</h1>
+        <p>Earn 40% of platform revenue by playing! Complete levels to earn 5 BON Coins!</p>
+        <img class="coin-img" src="https://www.canva.com/design/DAGpvXMDanY/bu_40e9V3YToDD248s-dOw/edit?utm_content=DAGpvXMDanY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">
+        <p>Your BON Coins: <span id="coinBalance">0</span></p>
+        <button onclick="window.location.href='tap-to-earn-1.html'">Play Game</button>
+        <button onclick="window.location.href='wallet.html'">Wallet</button>
+        <button onclick="window.location.href='tasks.html'">Tasks (Ads)</button>
+        <audio id="coinSound" src="https://limewire.com/d/YQFAi#f4e21gWcxu"></audio>
+    </div>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        const WebApp = window.Telegram.WebApp;
+        WebApp.ready();
+        document.getElementById('coinSound').play();
+        document.getElementById('coinBalance').innerText = localStorage.getItem('bonCoins') || 0;
+    </script>
+</body>
+</html>
