@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <script src='//libtl.com/sdk.js' data-zone='9426558' data-sdk='show_9426558'></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <style>
-        body { font-family: Poppins, Arial; background: linear-gradient(#0088cc, #ffffff); color: white; text-align: center; padding: 20px; }
-        h1 { font-size: 32px; }
-        p { font-size: 18px; }
-        .coin-img { width: 100px; animation: spin 2s infinite linear; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        button { background: #FFD700; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 10px; }
-        button:hover { background: #DAA520; box-shadow: 0 0 10px #FFD700; }
-    </style>
+    <!-- Dark Mode Button -->
+<button id="themeToggle" class="btn">🌙 Toggle Dark Mode</button>
+
+<!-- BON Coin Animation -->
+<div class="coin-container">
+  <img src="coin.png" class="floating-coin" alt="BON Coin">
+</div>
+
+<!-- Heading -->
+<h1>Welcome to BON to Cash</h1>
+
+<!-- Leaderboard -->
+<div class="leaderboard">
+  <div class="leaderboard-item"><span>👑 Naren</span><span>1500 Coins</span></div>
+  <div class="leaderboard-item"><span>🚀 Rahul</span><span>1200 Coins</span></div>
     <div>
         <h1>BON Game App</h1>
         <p>Earn 40% of platform revenue by playing! Complete levels to earn 5 BON Coins!</p>
